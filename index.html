@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkyWay Travel | Туристичне агентство</title>
+
+    <meta name="description"
+          content="Туристичне агентство SkyWay Travel. Гарячі тури, бронювання подорожей та відпочинок по всьому світу.">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+
+    <div class="container">
+
+        <div class="logo">
+            SkyWay Travel
+        </div>
+
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav class="nav" id="nav">
+
+            <a href="index.html">Головна</a>
+            <a href="tours.html">Тури</a>
+            <a href="about.html">Про нас</a>
+            <a href="contacts.html">Контакти</a>
+
+            <button class="register-btn" id="openModal">
+                Реєстрація
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+<main>
+
+<section class="hero">
+
+    <div class="container">
+
+        <h1>
+            Куди б ви хотіли поїхати?
+        </h1>
+
+        <p>
+            Оберіть напрямок та знайдіть свою наступну подорож.
+        </p>
+
+        <form class="search-form">
+
+            <select>
+                <option>Оберіть країну</option>
+                <option>Італія</option>
+                <option>Греція</option>
+                <option>Франція</option>
+                <option>Чехія</option>
+                <option>Норвегія</option>
+            </select>
+
+            <input type="date">
+
+            <input type="date">
+
+            <button type="submit">
+                Знайти тур
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<section class="advantages">
+
+    <div class="container">
+
+        <h2>Чому обирають нас</h2>
+
+        <div class="advantages-grid">
+
+            <div class="adv-card">
+                <h3>Найкращі ціни</h3>
+                <p>Вигідні пропозиції від перевірених партнерів.</p>
+            </div>
+
+            <div class="adv-card">
+                <h3>Підтримка 24/7</h3>
+                <p>Завжди допоможемо під час подорожі.</p>
+            </div>
+
+            <div class="adv-card">
+                <h3>Безпечний відпочинок</h3>
+                <p>Працюємо тільки з перевіреними готелями.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="popular-tours">
+
+    <div class="container">
+
+        <h2>Популярні тури</h2>
+
+        <div class="tour-grid">
+
+            <article class="tour-card">
+
+                <img src="images/italy.jpg"
+                     alt="Тур в Італію">
+
+                <div class="tour-content">
+
+                    <h3>Італія</h3>
+
+                    <p>
+                        Рим, Венеція, Флоренція.
+                    </p>
+
+                    <span class="price">
+                        від 19 999 грн
+                    </span>
+
+                    <a href="tours.html">
+                        Детальніше
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="tour-card">
+
+                <img src="images/greece.jpg"
+                     alt="Тур в Грецію">
+
+                <div class="tour-content">
+
+                    <h3>Греція</h3>
+
+                    <p>
+                        Найкращі пляжі та острови.
+                    </p>
+
+                    <span class="price">
+                        від 24 999 грн
+                    </span>
+
+                    <a href="tours.html">
+                        Детальніше
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="tour-card">
+
+                <img src="images/czech.jpg"
+                     alt="Тур в Чехію">
+
+                <div class="tour-content">
+
+                    <h3>Чехія</h3>
+
+                    <p>
+                        Прага та історичні замки.
+                    </p>
+
+                    <span class="price">
+                        від 14 999 грн
+                    </span>
+
+                    <a href="tours.html">
+                        Детальніше
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="stats">
+
+    <div class="container">
+
+        <div class="stat">
+            <h3>5000+</h3>
+            <p>Клієнтів</p>
+        </div>
+
+        <div class="stat">
+            <h3>150+</h3>
+            <p>Напрямків</p>
+        </div>
+
+        <div class="stat">
+            <h3>10+</h3>
+            <p>Років досвіду</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="gallery">
+
+    <div class="container">
+
+        <h2>Галерея подорожей</h2>
+
+        <div class="gallery-grid">
+
+            <img src="images/photo1.jpg" alt="Подорож">
+            <img src="images/photo2.jpg" alt="Подорож">
+            <img src="images/photo3.jpg" alt="Подорож">
+            <img src="images/photo4.jpg" alt="Подорож">
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 SkyWay Travel. Всі права захищені.
+        </p>
+
+    </div>
+
+</footer>
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <button class="close-btn" id="closeModal">
+            ×
+        </button>
+
+        <h2>Реєстрація</h2>
+
+        <form>
+
+            <input type="text"
+                   placeholder="Ваше ім'я">
+
+            <input type="email"
+                   placeholder="Email">
+
+            <input type="password"
+                   placeholder="Пароль">
+
+            <button type="submit">
+                Зареєструватися
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
