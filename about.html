@@ -1,0 +1,370 @@
+cat > /mnt/user-data/outputs/skyway/about.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="uk" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Про нас — SkyWay Travel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { line-height: 1.6; -webkit-font-smoothing: antialiased; transition: background .35s, color .35s; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+
+    :root {
+      --sky: #0ea5e9; --sky-dark: #0284c7; --sky-light: #e0f2fe;
+      --navy: #0c1a2e; --navy-2: #162236; --coral: #f97316;
+      --text: #1e293b; --text-muted: #64748b;
+      --white: #ffffff; --bg: #f8fafc; --border: #e2e8f0;
+      --r: 14px; --r-sm: 8px;
+      --shadow: 0 4px 24px rgba(14,165,233,0.12);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.14);
+      --t: 0.28s ease;
+      --font-h: 'Syne', sans-serif; --font-b: 'Mulish', sans-serif;
+    }
+    [data-theme="dark"] {
+      --text: #e2e8f0; --text-muted: #94a3b8;
+      --white: #0f172a; --bg: #1e293b; --border: #334155;
+      --navy: #e2e8f0; --navy-2: #0f172a;
+      --sky-light: #0f2a3e; --shadow-lg: 0 16px 48px rgba(0,0,0,.45);
+    }
+    [data-theme="dark"] body { background: #0f172a; }
+    [data-theme="dark"] .team-card,
+    [data-theme="dark"] .value-card { background: #1e293b; border-color: #334155; }
+    [data-theme="dark"] .timeline-item::before { background: #1e293b; }
+    [data-theme="dark"] .footer { background: #080f1a; }
+
+    body { font-family: var(--font-b); color: var(--text); background: var(--white); }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* HEADER */
+    .header { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: .9rem 0; transition: all var(--t); }
+    .header.scrolled { background: rgba(12,26,46,.94); backdrop-filter: blur(20px); padding: .6rem 0; box-shadow: 0 4px 24px rgba(0,0,0,.25); }
+    [data-theme="dark"] .header.scrolled { background: rgba(15,23,42,.96); }
+    .header .container { display: flex; align-items: center; gap: 1.5rem; }
+    .logo { display: flex; align-items: center; gap: .5rem; font-family: var(--font-h); font-size: 1.35rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .logo-icon { color: var(--sky); }
+    .nav { display: flex; align-items: center; gap: .15rem; margin-left: auto; }
+    .nav a { padding: .45rem .9rem; color: rgba(255,255,255,.8); border-radius: 50px; font-size: .9rem; font-weight: 500; transition: all var(--t); }
+    .nav a:hover, .nav a.active { color: #fff; background: rgba(14,165,233,.22); }
+    .header-phone { color: rgba(255,255,255,.75); font-size: .88rem; font-weight: 500; }
+    .theme-toggle { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.35); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all var(--t); background: rgba(255,255,255,.1); backdrop-filter: blur(8px); flex-shrink: 0; }
+    .theme-toggle:hover { background: rgba(255,255,255,.22); transform: rotate(15deg); }
+    .burger { display: none; flex-direction: column; gap: 5px; padding: .5rem; }
+    .burger span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: all var(--t); }
+    .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; gap: .45rem; padding: .7rem 1.6rem; border-radius: 50px; font-weight: 600; font-size: .9rem; transition: all var(--t); cursor: pointer; font-family: var(--font-h); }
+    .btn-primary { background: var(--sky); color: #fff; border: 2px solid var(--sky); }
+    .btn-primary:hover { background: var(--sky-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,165,233,.38); }
+    .btn-sm { padding: .45rem 1.1rem; font-size: .82rem; }
+    .login-btn { background: transparent; color: rgba(255,255,255,.85); border: 1.5px solid rgba(255,255,255,.4); border-radius: 50px; padding: .45rem 1.1rem; font-size: .82rem; font-family: var(--font-h); font-weight: 600; }
+    .login-btn:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,.1); }
+
+    /* PAGE HERO */
+    .page-hero {
+      min-height: 50vh; position: relative; display: flex; align-items: center;
+      background: linear-gradient(135deg, #071627 0%, #0c2a45 45%, #0e4f79 100%);
+      overflow: hidden;
+    }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 60% 50%, rgba(14,165,233,.18) 0%, transparent 65%); }
+    .page-hero-dots { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+    .page-hero-content { position: relative; z-index: 2; padding: 8rem 1.5rem 4rem; }
+    .page-breadcrumb { display: flex; align-items: center; gap: .5rem; color: rgba(255,255,255,.55); font-size: .85rem; margin-bottom: 1.2rem; }
+    .page-breadcrumb a { color: var(--sky); }
+    .page-breadcrumb span { color: rgba(255,255,255,.35); }
+    .page-hero h1 { font-family: var(--font-h); font-size: clamp(2.2rem,5vw,3.8rem); font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: .85rem; }
+    .page-hero p { color: rgba(255,255,255,.7); font-size: 1.05rem; max-width: 540px; line-height: 1.75; }
+
+    /* SECTIONS */
+    section.sec { padding: 5rem 0; }
+    .sec-tag { color: var(--sky); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .6rem; }
+    .sec-title { font-family: var(--font-h); font-size: clamp(1.7rem,3.5vw,2.5rem); color: var(--navy); line-height: 1.18; margin-bottom: .85rem; }
+    .sec-sub { color: var(--text-muted); line-height: 1.7; }
+
+    /* STORY SECTION */
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .story-img { border-radius: var(--r); overflow: hidden; position: relative; }
+    .story-img img { width: 100%; height: 420px; object-fit: cover; }
+    .story-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,165,233,.15) 0%, transparent 60%); }
+    .story-badge { position: absolute; bottom: 1.5rem; left: 1.5rem; background: rgba(12,26,46,.85); color: #fff; padding: .85rem 1.4rem; border-radius: var(--r-sm); backdrop-filter: blur(8px); z-index: 2; }
+    .story-badge-num { font-family: var(--font-h); font-size: 2rem; font-weight: 800; color: var(--sky); line-height: 1; }
+    .story-badge-label { font-size: .82rem; color: rgba(255,255,255,.7); }
+    .story-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.2rem; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 2.5rem; margin-top: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: .6rem; top: 0; bottom: 0; width: 2px; background: var(--border); }
+    .timeline-item { position: relative; padding-bottom: 2rem; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before { content: ''; position: absolute; left: -2rem; top: .35rem; width: 14px; height: 14px; border-radius: 50%; background: var(--white); border: 3px solid var(--sky); }
+    .timeline-year { font-family: var(--font-h); font-size: .8rem; font-weight: 800; color: var(--sky); letter-spacing: .08em; text-transform: uppercase; margin-bottom: .2rem; }
+    .timeline-title { font-family: var(--font-h); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .3rem; }
+    .timeline-desc { color: var(--text-muted); font-size: .88rem; line-height: 1.6; }
+
+    /* VALUES */
+    .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .value-card { background: var(--white); border: 2px solid var(--border); border-radius: var(--r); padding: 2rem 1.75rem; transition: all var(--t); position: relative; overflow: hidden; }
+    .value-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--sky); transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+    .value-card:hover { border-color: var(--sky); transform: translateY(-4px); box-shadow: var(--shadow); }
+    .value-card:hover::after { transform: scaleX(1); }
+    .value-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .value-card h3 { font-family: var(--font-h); font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: .5rem; }
+    .value-card p { color: var(--text-muted); font-size: .88rem; line-height: 1.65; }
+
+    /* TEAM */
+    .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; }
+    .team-card { background: var(--white); border: 2px solid var(--border); border-radius: var(--r); overflow: hidden; transition: all var(--t); }
+    .team-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--sky); }
+    .team-photo { height: 220px; overflow: hidden; position: relative; }
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .team-card:hover .team-photo img { transform: scale(1.06); }
+    .team-info { padding: 1.25rem; }
+    .team-name { font-family: var(--font-h); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: .2rem; }
+    .team-role { color: var(--sky); font-size: .82rem; font-weight: 600; margin-bottom: .6rem; }
+    .team-bio { color: var(--text-muted); font-size: .83rem; line-height: 1.6; }
+
+    /* STATS BAND */
+    .stats-band { background: linear-gradient(135deg, #0c1a2e 0%, #0e4f79 100%); padding: 3.5rem 0; }
+    [data-theme="dark"] .stats-band { background: linear-gradient(135deg, #0f172a 0%, #0e3a5a 100%); }
+    .stats-inner { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; }
+    .stat-item { text-align: center; }
+    .stat-num { font-family: var(--font-h); font-size: 2.8rem; font-weight: 800; color: #fff; line-height: 1; }
+    .stat-label { color: rgba(255,255,255,.6); font-size: .88rem; margin-top: .35rem; }
+
+    /* FOOTER */
+    .footer { background: var(--navy-2); padding: 3.5rem 0 0; }
+    .footer-inner { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .footer-about { color: rgba(255,255,255,.5); font-size: .88rem; line-height: 1.7; margin-top: .75rem; }
+    .footer-col h4 { color: #fff; font-family: var(--font-h); font-size: .85rem; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 1.2rem; }
+    .footer-col ul li { margin-bottom: .55rem; }
+    .footer-col ul a { color: rgba(255,255,255,.5); font-size: .88rem; transition: color var(--t); }
+    .footer-col ul a:hover { color: var(--sky); }
+    .footer-contacts li { color: rgba(255,255,255,.5); font-size: .88rem; margin-bottom: .65rem; }
+    .footer-bottom { padding: 1.3rem 0; }
+    .footer-bottom .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; }
+    .footer-bottom p { color: rgba(255,255,255,.3); font-size: .83rem; }
+    .footer-bottom a { color: rgba(255,255,255,.3); font-size: .83rem; transition: color var(--t); }
+    .footer-bottom a:hover { color: var(--sky); }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(16px); background: #0c1a2e; color: #fff; padding: .75rem 1.5rem; border-radius: 50px; font-size: .9rem; opacity: 0; pointer-events: none; transition: all .32s; z-index: 3000; border-left: 3px solid var(--sky); }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* BTN UP */
+    .btn-up { position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--sky); color: #fff; font-size: 1.1rem; opacity: 0; pointer-events: none; transition: all var(--t); z-index: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(14,165,233,.4); }
+    .btn-up.vis { opacity: 1; pointer-events: all; }
+    .btn-up:hover { background: var(--sky-dark); transform: translateY(-3px); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+
+    @media(max-width:1024px) { .footer-inner { grid-template-columns: 1fr 1fr; } .team-grid { grid-template-columns: 1fr 1fr; } .values-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:768px) {
+      .nav, .header-phone { display: none; }
+      .nav.open { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0c1a2e; z-index: 999; padding: 5rem 2rem 2rem; align-items: flex-start; gap: .5rem; }
+      [data-theme="dark"] .nav.open { background: #080f1a; }
+      .nav.open a { font-size: 1.2rem; padding: .7rem 1rem; }
+      .burger { display: flex; margin-left: auto; }
+      .story-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .values-grid, .team-grid { grid-template-columns: 1fr; }
+      .stats-inner { gap: 2rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom .container { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Головна</a>
+      <a href="tours.html">Тури</a>
+      <a href="about.html" class="active">Про нас</a>
+      <a href="contacts.html">Контакти</a>
+    </nav>
+    <div class="header-phone">📞 +38 (067) 412-83-59</div>
+    <div style="display:flex;align-items:center;gap:.65rem;margin-left:auto">
+      <button class="login-btn" onclick="showToast('Відкрийте index.html для входу')">Увійти</button>
+      <button class="btn btn-primary btn-sm" onclick="showToast('Відкрийте index.html для реєстрації')">Реєстрація</button>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Тема">🌙</button>
+    <button class="burger" id="burger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-dots"></div>
+  <div class="page-hero-content container">
+    <div class="page-breadcrumb"><a href="index.html">Головна</a><span>›</span><span>Про нас</span></div>
+    <h1>Ми — SkyWay Travel</h1>
+    <p>З 2014 року допомагаємо людям відкривати світ. Понад 5000 мандрівників довірили нам свої незабутні подорожі.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="sec">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-img reveal">
+        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&auto=format" alt="Команда SkyWay Travel">
+        <div class="story-badge">
+          <div class="story-badge-num">10+</div>
+          <div class="story-badge-label">Років на ринку</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="sec-tag">Наша історія</p>
+        <h2 class="sec-title">Подорожі — це наша пристрасть</h2>
+        <div class="story-text">
+          <p>SkyWay Travel заснована у 2014 році групою ентузіастів-мандрівників, які хотіли зробити якісний відпочинок доступним для кожного. Ми починали з невеликого офісу в центрі Києва, а сьогодні — це команда з 35 фахівців і понад 150 напрямків.</p>
+          <p>Наша місія проста: щоб кожен клієнт повернувся додому щасливим і вже планував наступну пригоду разом з нами.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">2014</div>
+            <div class="timeline-title">Заснування агентства</div>
+            <div class="timeline-desc">Перший офіс на Хрещатику, 5 перших напрямків.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2017</div>
+            <div class="timeline-title">1000-й клієнт</div>
+            <div class="timeline-desc">Розширення команди, запуск онлайн-бронювання.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-title">Цифрова трансформація</div>
+            <div class="timeline-desc">Новий сайт, мобільний додаток та чат-підтримка 24/7.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-title">5000+ клієнтів</div>
+            <div class="timeline-desc">150+ напрямків, 98% позитивних відгуків.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="sec" style="background:var(--bg)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem" class="reveal">
+      <p class="sec-tag">Наші цінності</p>
+      <h2 class="sec-title">На чому ми будуємо роботу</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal"><div class="value-icon">🤝</div><h3>Довіра</h3><p>Чесність у всьому — від цін до умов бронювання. Жодних прихованих платежів.</p></div>
+      <div class="value-card reveal"><div class="value-icon">🎯</div><h3>Індивідуальний підхід</h3><p>Кожна подорож унікальна. Ми слухаємо вас і підбираємо тур під ваші бажання.</p></div>
+      <div class="value-card reveal"><div class="value-icon">⚡</div><h3>Оперативність</h3><p>Бронювання за 5 хвилин. Відповідь на запит — протягом години.</p></div>
+      <div class="value-card reveal"><div class="value-icon">🌿</div><h3>Відповідальний туризм</h3><p>Підтримуємо місцеві спільноти та еко-ініціативи в країнах, куди відправляємо клієнтів.</p></div>
+      <div class="value-card reveal"><div class="value-icon">🏅</div><h3>Якість</h3><p>Лише перевірені партнери — готелі, авіакомпанії та страхові компанії.</p></div>
+      <div class="value-card reveal"><div class="value-icon">💬</div><h3>Підтримка</h3><p>Ми поряд 24/7. Під час подорожі ви ніколи не залишитеся наодинці з проблемою.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-band">
+  <div class="container stats-inner">
+    <div class="stat-item reveal"><div class="stat-num">5 000+</div><div class="stat-label">Задоволених клієнтів</div></div>
+    <div class="stat-item reveal"><div class="stat-num">150+</div><div class="stat-label">Напрямків</div></div>
+    <div class="stat-item reveal"><div class="stat-num">35</div><div class="stat-label">Фахівців у команді</div></div>
+    <div class="stat-item reveal"><div class="stat-num">98%</div><div class="stat-label">Позитивних відгуків</div></div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem" class="reveal">
+      <p class="sec-tag">Наша команда</p>
+      <h2 class="sec-title">Люди, які роблять подорожі незабутніми</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format" alt="Олексій Мороз"></div>
+        <div class="team-info"><div class="team-name">Олексій Мороз</div><div class="team-role">Засновник & CEO</div><div class="team-bio">Мандрував у 60+ країнах. Мрія стала бізнесом у 2014 році.</div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format" alt="Марина Коваль"></div>
+        <div class="team-info"><div class="team-name">Марина Коваль</div><div class="team-role">Head of Sales</div><div class="team-bio">Підбирає тури так, що клієнти повертаються знову і знову.</div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&auto=format" alt="Дмитро Савченко"></div>
+        <div class="team-info"><div class="team-name">Дмитро Савченко</div><div class="team-role">Travel Expert</div><div class="team-bio">Спеціаліст з Азії та екзотичних напрямків. Знає Таїланд як свою долоню.</div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format" alt="Анна Литвин"></div>
+        <div class="team-info"><div class="team-name">Анна Литвин</div><div class="team-role">Customer Care</div><div class="team-bio">Завжди на зв'язку. Вирішить будь-яке питання швидко і з посмішкою.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+      <p class="footer-about">Ваш надійний партнер у подорожах з 2014 року. Більше 5000 щасливих клієнтів по всьому світу.</p>
+    </div>
+    <div class="footer-col"><h4>Навігація</h4><ul><li><a href="index.html">Головна</a></li><li><a href="tours.html">Тури</a></li><li><a href="about.html">Про нас</a></li><li><a href="contacts.html">Контакти</a></li></ul></div>
+    <div class="footer-col"><h4>Напрямки</h4><ul><li><a href="#">Європа</a></li><li><a href="#">Азія</a></li><li><a href="#">Африка</a></li><li><a href="#">Америка</a></li><li><a href="#">Острови</a></li></ul></div>
+    <div class="footer-col"><h4>Контакти</h4><ul class="footer-contacts"><li>📍 вул. Хрещатик, 22, Київ</li><li>📞 +38 (067) 412-83-59</li><li>✉️ info@skyway.ua</li><li>🕐 Пн–Пт: 9:00–18:00</li></ul></div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 SkyWay Travel. Всі права захищені.</p><a href="#">Політика конфіденційності</a></div></div>
+</footer>
+
+<button class="btn-up" id="btnUp" aria-label="Вгору">↑</button>
+<div class="toast" id="toast"></div>
+
+<script>
+  // theme
+  const html=document.documentElement;
+  const toggle=document.getElementById('themeToggle');
+  const saved=localStorage.getItem('sw-theme')||'light';
+  html.setAttribute('data-theme',saved);
+  toggle.textContent=saved==='dark'?'☀️':'🌙';
+  toggle.addEventListener('click',()=>{
+    const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+    html.setAttribute('data-theme',next);
+    toggle.textContent=next==='dark'?'☀️':'🌙';
+    localStorage.setItem('sw-theme',next);
+  });
+
+  // header
+  window.addEventListener('scroll',()=>{
+    document.getElementById('header').classList.toggle('scrolled',window.scrollY>60);
+    document.getElementById('btnUp').classList.toggle('vis',window.scrollY>400);
+  });
+  document.getElementById('btnUp').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  // burger
+  const burger=document.getElementById('burger');
+  const nav=document.getElementById('nav');
+  burger.addEventListener('click',()=>{burger.classList.toggle('open');nav.classList.toggle('open');});
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');nav.classList.remove('open');}));
+
+  // reveal
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}}),{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+</script>
+</body>
+</html>
+HTMLEOF

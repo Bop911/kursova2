@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyWay Travel — Наші тури та послуги</title>
+  <meta name="description" content="Каталог турів SkyWay Travel. Пляжний відпочинок, гірські тури, міські екскурсії та екзотичні напрямки по всьому світу.">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ══ RESET ══ */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{line-height:1.6;-webkit-font-smoothing:antialiased}
+    img,picture,video,canvas,svg{display:block;max-width:100%}
+    input,button,textarea,select{font:inherit}
+    ul{list-style:none}
+    a{text-decoration:none;color:inherit}
+    button{cursor:pointer;border:none;background:none}
+
+    /* ══ VARS ══ */
+    :root {
+      --sky:#0ea5e9; --sky-dark:#0284c7; --sky-light:#e0f2fe;
+      --navy:#0c1a2e; --navy-2:#162236; --coral:#f97316;
+      --text:#1e293b; --text-muted:#64748b;
+      --white:#ffffff; --bg:#f8fafc; --border:#e2e8f0;
+      --r:14px; --r-sm:8px;
+      --shadow:0 4px 24px rgba(14,165,233,.12);
+      --shadow-lg:0 16px 48px rgba(0,0,0,.14);
+      --t:.28s ease;
+      --font-h:'Syne',sans-serif; --font-b:'Mulish',sans-serif;
+    }
+    [data-theme="dark"] {
+      --sky:#38bdf8; --sky-dark:#0ea5e9; --sky-light:#0c2a45;
+      --navy:#e2e8f0; --navy-2:#0f172a; --text:#cbd5e1;
+      --text-muted:#94a3b8; --white:#1e293b; --bg:#0f172a;
+      --border:#334155; --shadow:0 4px 24px rgba(0,0,0,.4);
+      --shadow-lg:0 16px 48px rgba(0,0,0,.55);
+    }
+    [data-theme="dark"] body{background:#0f172a;color:#cbd5e1}
+    [data-theme="dark"] .search-inline input,
+    [data-theme="dark"] .search-inline select{background:#1e293b;color:#cbd5e1;border-color:#334155}
+    [data-theme="dark"] .tour-card{background:#1e293b;border-color:#334155}
+    [data-theme="dark"] .svc-card{background:#1e293b;border-color:#334155}
+    [data-theme="dark"] .feat-card{background:#1e293b;border-color:#334155}
+    [data-theme="dark"] .filter-btn{background:#1e293b;color:#94a3b8;border-color:#334155}
+    [data-theme="dark"] .sort-sel{background:#1e293b;color:#cbd5e1;border-color:#334155}
+    [data-theme="dark"] .modal-box{background:#1e293b}
+    [data-theme="dark"] .fg input{background:#0f172a;color:#cbd5e1;border-color:#334155}
+    [data-theme="dark"] .tours-body{background:#0f172a}
+    [data-theme="dark"] .services-body{background:#1a2840}
+    [data-theme="dark"] .features-body{background:#0f172a}
+    [data-theme="dark"] .footer{background:#020c1a}
+
+    /* ══ BASE ══ */
+    body{font-family:var(--font-b);color:var(--text);background:var(--white)}
+    .container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+    .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.6rem;border-radius:50px;font-weight:600;font-size:.9rem;transition:all var(--t);cursor:pointer;font-family:var(--font-h);letter-spacing:.02em}
+    .btn-primary{background:var(--sky);color:#fff;border:2px solid var(--sky)}
+    .btn-primary:hover{background:var(--sky-dark);border-color:var(--sky-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,165,233,.38)}
+    .btn-outline{background:transparent;color:var(--sky);border:2px solid var(--sky)}
+    .btn-outline:hover{background:var(--sky);color:#fff;transform:translateY(-2px)}
+    .btn-ghost{background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.45);backdrop-filter:blur(8px)}
+    .btn-ghost:hover{background:rgba(255,255,255,.28);border-color:#fff}
+    .btn-sm{padding:.45rem 1.1rem;font-size:.82rem}
+
+    /* ══ HEADER ══ */
+    .header{position:fixed;top:0;left:0;right:0;z-index:900;padding:.9rem 0;transition:all var(--t)}
+    .header.scrolled{background:rgba(12,26,46,.94);backdrop-filter:blur(20px);padding:.6rem 0;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+    .header .container{display:flex;align-items:center;gap:1.5rem}
+    .logo{display:flex;align-items:center;gap:.5rem;font-family:var(--font-h);font-size:1.35rem;font-weight:800;color:#fff;flex-shrink:0;text-decoration:none}
+    .logo-icon{color:var(--sky)}
+    .nav{display:flex;align-items:center;gap:.15rem;margin-left:auto}
+    .nav a{padding:.45rem .9rem;color:rgba(255,255,255,.8);border-radius:50px;font-size:.9rem;font-weight:500;transition:all var(--t)}
+    .nav a:hover,.nav a.active{color:#fff;background:rgba(14,165,233,.22)}
+    .header-phone{color:rgba(255,255,255,.75);font-size:.88rem;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+    .header-phone::before{content:'📞';font-size:.85rem}
+    .header-actions{display:flex;align-items:center;gap:.65rem}
+    .header-actions .btn{padding:.55rem 1.25rem;font-size:.85rem}
+    .login-btn{background:transparent;color:rgba(255,255,255,.85);border:1.5px solid rgba(255,255,255,.4);border-radius:50px}
+    .login-btn:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.1)}
+    .theme-toggle{width:40px;height:40px;border-radius:50%;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--t);flex-shrink:0}
+    .theme-toggle:hover{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.7);transform:rotate(20deg)}
+    .burger{display:none;flex-direction:column;gap:5px;padding:.5rem}
+    .burger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all var(--t)}
+    .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    /* ══ HERO / PAGE BANNER ══ */
+    .page-hero{
+      min-height:52vh;display:flex;align-items:flex-end;padding-bottom:4rem;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,#071627 0%,#0c2a45 45%,#0e4f79 100%);
+    }
+    .page-hero::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 70% 60% at 70% 50%,rgba(14,165,233,.2) 0%,transparent 65%);
+    }
+    .page-hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+    .page-hero-content{position:relative;z-index:2;padding-top:6rem}
+    .breadcrumb{display:flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.55);font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+    .breadcrumb a{color:rgba(255,255,255,.55);transition:color var(--t)}
+    .breadcrumb a:hover{color:var(--sky)}
+    .breadcrumb span{color:rgba(255,255,255,.35)}
+    .page-hero h1{font-family:var(--font-h);font-size:clamp(2.2rem,6vw,4rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.75rem}
+    .page-hero h1 em{font-style:italic;color:var(--sky)}
+    .page-hero p{color:rgba(255,255,255,.65);font-size:1.05rem;max-width:540px;line-height:1.7}
+
+    /* ══ SECTION ══ */
+    .sec{padding:5.5rem 0}
+    .sec-head{text-align:center;margin-bottom:3rem}
+    .sec-tag{color:var(--sky);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem}
+    .sec-title{font-family:var(--font-h);font-size:clamp(1.75rem,4vw,2.6rem);color:var(--navy);line-height:1.18;margin-bottom:.85rem}
+    .sec-sub{color:var(--text-muted);max-width:500px;margin:0 auto;line-height:1.7}
+
+    /* ══ TOURS SECTION ══ */
+    .tours-body{background:var(--bg);padding:5.5rem 0}
+    .filter-sort-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+    .filter-bar{display:flex;gap:.6rem;flex-wrap:wrap}
+    .filter-btn{padding:.48rem 1.15rem;border-radius:50px;border:2px solid var(--border);background:#fff;color:var(--text-muted);font-size:.83rem;font-weight:600;font-family:var(--font-h);transition:all var(--t);cursor:pointer}
+    .filter-btn:hover,.filter-btn.active{border-color:var(--sky);background:var(--sky);color:#fff}
+    .sort-sel{padding:.5rem 1rem;border:2px solid var(--border);border-radius:50px;font-size:.85rem;color:var(--text);background:#fff;cursor:pointer;font-family:var(--font-b);font-weight:600;transition:border-color var(--t)}
+    .sort-sel:focus{outline:none;border-color:var(--sky)}
+
+    /* inline search */
+    .search-inline{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2.5rem;padding:1.5rem;background:#fff;border-radius:var(--r);box-shadow:var(--shadow);border:1px solid var(--border)}
+    [data-theme="dark"] .search-inline{background:#1e293b;border-color:#334155}
+    .si-group{flex:1;min-width:140px}
+    .si-group label{display:block;font-size:.73rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.38rem}
+    .si-group input,.si-group select{width:100%;padding:.6rem .9rem;border:2px solid var(--border);border-radius:var(--r-sm);font-size:.9rem;color:var(--text);background:var(--bg);transition:border-color var(--t)}
+    .si-group input:focus,.si-group select:focus{outline:none;border-color:var(--sky);background:#fff}
+
+    /* tours grid */
+    .tours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.75rem;margin-bottom:2.5rem}
+    .tour-card{border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.07);transition:all var(--t);display:flex;flex-direction:column}
+    .tour-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .tc-img{width:100%;height:210px;position:relative;overflow:hidden}
+    .tc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+    .tour-card:hover .tc-img img{transform:scale(1.07)}
+    .tc-badge{position:absolute;top:.85rem;left:.85rem;background:var(--coral);color:#fff;padding:.25rem .75rem;border-radius:50px;font-size:.74rem;font-weight:700;font-family:var(--font-h)}
+    .tc-cat{position:absolute;top:.85rem;right:.85rem;background:rgba(12,26,46,.7);color:rgba(255,255,255,.9);padding:.2rem .65rem;border-radius:50px;font-size:.71rem;font-weight:600;backdrop-filter:blur(4px)}
+    .tc-body{padding:1.25rem;flex:1;display:flex;flex-direction:column}
+    .tc-loc{color:var(--sky);font-size:.8rem;font-weight:700;margin-bottom:.35rem}
+    .tc-name{font-family:var(--font-h);font-size:1.12rem;color:var(--navy);margin-bottom:.4rem;font-weight:700}
+    .tc-desc{color:var(--text-muted);font-size:.87rem;line-height:1.6;margin-bottom:.85rem;flex:1}
+    .tc-meta{display:flex;gap:.85rem;font-size:.78rem;color:var(--text-muted);margin-bottom:1rem;flex-wrap:wrap}
+    .tc-footer{display:flex;align-items:center;justify-content:space-between;padding-top:.85rem;border-top:1px solid var(--border)}
+    .tc-price{font-family:var(--font-h);font-size:1.25rem;font-weight:800;color:var(--navy)}
+    .tc-price small{font-size:.76rem;color:var(--text-muted);font-family:var(--font-b);font-weight:400}
+    .no-results{text-align:center;padding:3rem;color:var(--text-muted);font-size:1.05rem;display:none}
+    .tours-cta{text-align:center;margin-top:.5rem}
+
+    /* ══ FEATURES SECTION ══ */
+    .features-body{background:#fff;padding:5.5rem 0}
+    .feat-inner{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:center}
+    .feat-text .sec-title{text-align:left;margin-bottom:1rem}
+    .feat-lead{color:var(--text-muted);font-size:1.05rem;line-height:1.75;margin-bottom:1.25rem}
+    .feat-list{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2rem}
+    .feat-list li{display:flex;align-items:flex-start;gap:.75rem;color:var(--text-muted);font-size:.95rem;line-height:1.6}
+    .feat-list li::before{content:'✓';flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--sky-light);color:var(--sky);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;margin-top:.1rem}
+    .feat-img-wrap{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-lg);position:relative}
+    .feat-img-wrap img{width:100%;height:420px;object-fit:cover}
+    .feat-img-badge{position:absolute;bottom:1.5rem;left:1.5rem;background:rgba(12,26,46,.88);backdrop-filter:blur(10px);color:#fff;padding:1rem 1.4rem;border-radius:var(--r-sm);border-left:3px solid var(--sky)}
+    .feat-img-badge strong{display:block;font-family:var(--font-h);font-size:1.1rem}
+    .feat-img-badge span{font-size:.82rem;color:rgba(255,255,255,.65)}
+
+    /* ══ FEATURE CARDS ══ */
+    .feat-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+    .feat-card{background:#fff;border-radius:var(--r);padding:1.85rem 1.6rem;border:2px solid var(--border);transition:all var(--t);position:relative;overflow:hidden}
+    .feat-card::before{content:'';position:absolute;bottom:-40px;right:-30px;width:90px;height:90px;border-radius:50%;background:var(--sky-light);transition:all .4s ease}
+    .feat-card:hover{border-color:var(--sky);transform:translateY(-4px);box-shadow:var(--shadow)}
+    .feat-card:hover::before{width:140px;height:140px}
+    .feat-icon{font-size:2.1rem;margin-bottom:1rem}
+    .feat-card h3{font-family:var(--font-h);font-size:1.05rem;color:var(--navy);margin-bottom:.5rem;font-weight:700}
+    .feat-card p{color:var(--text-muted);font-size:.88rem;line-height:1.65}
+
+    /* ══ SERVICES SECTION ══ */
+    .services-body{background:var(--bg);padding:5.5rem 0}
+    .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+    .svc-card{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.07);transition:all var(--t);display:flex;flex-direction:column}
+    .svc-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+    .svc-img{position:relative;overflow:hidden;height:200px}
+    .svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+    .svc-card:hover .svc-img img{transform:scale(1.07)}
+    .svc-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,26,46,.55) 0%,transparent 55%)}
+    .svc-body{padding:1.35rem;flex:1;display:flex;flex-direction:column}
+    .svc-body h3{font-family:var(--font-h);font-size:1.1rem;color:var(--navy);margin-bottom:.45rem;font-weight:700}
+    .svc-body p{color:var(--text-muted);font-size:.88rem;line-height:1.65;flex:1;margin-bottom:1rem}
+    .svc-btn{align-self:flex-start;padding:.42rem 1.1rem;border-radius:50px;border:2px solid var(--sky);color:var(--sky);font-size:.8rem;font-weight:700;font-family:var(--font-h);transition:all var(--t)}
+    .svc-btn:hover{background:var(--sky);color:#fff}
+
+    /* ══ FOOTER ══ */
+    .footer{background:var(--navy-2,#162236);padding:4.5rem 0 0}
+    .footer-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2.5rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.08)}
+    .footer-about{color:rgba(255,255,255,.5);font-size:.88rem;line-height:1.7;margin-top:.85rem}
+    .footer-col h4{color:#fff;font-family:var(--font-h);font-size:.85rem;letter-spacing:.07em;text-transform:uppercase;margin-bottom:1.2rem}
+    .footer-col ul li{margin-bottom:.55rem}
+    .footer-col ul a{color:rgba(255,255,255,.5);font-size:.88rem;transition:color var(--t)}
+    .footer-col ul a:hover{color:var(--sky)}
+    .footer-contacts li{color:rgba(255,255,255,.5);font-size:.88rem;margin-bottom:.7rem}
+    .social-links{display:flex;gap:.65rem;margin-top:1.4rem}
+    .social-link{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:all var(--t)}
+    .social-link:hover{border-color:var(--sky);background:rgba(14,165,233,.18)}
+    .social-link svg{width:18px;height:18px;fill:rgba(255,255,255,.65);transition:fill var(--t)}
+    .social-link:hover svg{fill:var(--sky)}
+    .footer-bottom{padding:1.4rem 0}
+    .footer-bottom .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+    .footer-bottom p,.footer-bottom a{color:rgba(255,255,255,.3);font-size:.83rem;transition:color var(--t)}
+    .footer-bottom a:hover{color:var(--sky)}
+
+    /* ══ MODAL ══ */
+    .modal{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;padding:1rem}
+    .modal.open{display:flex}
+    .modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px)}
+    .modal-box{position:relative;background:#fff;border-radius:var(--r);padding:2.5rem;width:100%;max-width:420px;box-shadow:var(--shadow-lg);z-index:1;animation:mIn .3s ease}
+    @keyframes mIn{from{opacity:0;transform:translateY(-18px) scale(.97)}to{opacity:1;transform:none}}
+    .modal-close{position:absolute;top:1.1rem;right:1.1rem;width:32px;height:32px;border-radius:50%;background:var(--bg);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--t)}
+    .modal-close:hover{background:var(--sky);color:#fff}
+    .modal-title{font-family:var(--font-h);font-size:1.65rem;color:var(--navy);margin-bottom:.25rem}
+    .modal-sub{color:var(--text-muted);font-size:.88rem;margin-bottom:1.65rem}
+    .fg{margin-bottom:1rem}
+    .fg label{display:block;font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:.38rem}
+    .fg input{width:100%;padding:.78rem 1rem;border:2px solid var(--border);border-radius:var(--r-sm);font-size:.93rem;color:var(--text);background:var(--bg);transition:border-color var(--t)}
+    .fg input:focus{outline:none;border-color:var(--sky);background:#fff}
+    .modal .btn-primary{width:100%;justify-content:center;margin-top:.5rem}
+    .modal-switch{text-align:center;margin-top:1.2rem;font-size:.88rem;color:var(--text-muted)}
+    .modal-switch a{color:var(--sky);font-weight:700}
+
+    /* ══ TOAST ══ */
+    .toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(16px);background:var(--navy);color:#fff;padding:.78rem 1.65rem;border-radius:50px;font-size:.9rem;opacity:0;pointer-events:none;transition:all .32s ease;z-index:3000;white-space:nowrap;border-left:3px solid var(--sky)}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* ══ BTN UP ══ */
+    .btn-up{position:fixed;bottom:2rem;right:2rem;width:48px;height:48px;border-radius:50%;background:var(--sky);color:#fff;font-size:1.1rem;box-shadow:0 4px 20px rgba(14,165,233,.4);opacity:0;pointer-events:none;transition:all var(--t);z-index:800;display:flex;align-items:center;justify-content:center}
+    .btn-up.vis{opacity:1;pointer-events:all}
+    .btn-up:hover{background:var(--sky-dark);transform:translateY(-3px)}
+
+    /* ══ REVEAL ══ */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.on{opacity:1;transform:none}
+
+    /* ══ RESPONSIVE ══ */
+    @media(max-width:1024px){
+      .feat-inner{grid-template-columns:1fr;gap:2.5rem}
+      .feat-img-wrap img{height:300px}
+      .footer-inner{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:768px){
+      .nav,.header-phone,.header-actions{display:none}
+      .nav.open{display:flex;flex-direction:column;gap:.5rem;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(12,26,46,.97);backdrop-filter:blur(12px);z-index:999;padding:5rem 2rem 2rem;align-items:flex-start;overflow-y:auto}
+      .nav.open a{font-size:1.25rem;padding:.7rem 1rem;display:block;color:rgba(255,255,255,.8)}
+      .nav.open .mobile-extras{display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem;width:100%}
+      .burger{display:flex;margin-left:auto}
+      .filter-sort-row{flex-direction:column;align-items:flex-start}
+      .search-inline{flex-direction:column}
+      .si-group{width:100%}
+      .footer-inner{grid-template-columns:1fr;gap:2rem}
+      .footer-bottom .container{flex-direction:column;text-align:center}
+    }
+    
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="header" id="header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Головна</a>
+      <a href="tours.html" class="active">Тури</a>
+      <a href="about.html">Про нас</a>
+      <a href="contacts.html">Контакти</a>
+      <div class="mobile-extras">
+        <button class="btn btn-sm login-btn" onclick="openModal('loginModal')">Увійти</button>
+        <button class="btn btn-sm btn-primary" onclick="openModal('registerModal')">Реєстрація</button>
+      </div>
+    </nav>
+    <div class="header-phone">+38 (067) 412-83-59</div>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Змінити тему">🌙</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero">
+  <div class="hero-dots page-hero-dots"></div>
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Головна</a>
+      <span>/</span>
+      <span style="color:rgba(255,255,255,.85)">Тури</span>
+    </div>
+    <h1>Наші <em>тури</em></h1>
+    <p>Понад 12 напрямків — від тихих пляжів до засніжених вершин. Знайдіть свою ідеальну подорож.</p>
+  </div>
+</section>
+
+<!-- ══ TOURS CATALOG ══ -->
+<section class="tours-body" id="tours">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-tag">Каталог турів</p>
+      <h2 class="sec-title">Обирайте напрямок</h2>
+      <p class="sec-sub">Використовуйте пошук та фільтри, щоб знайти ідеальний тур</p>
+    </div>
+
+    <!-- inline search -->
+    <div class="search-inline reveal">
+      <div class="si-group">
+        <label>Країна</label>
+        <select id="sCountry">
+          <option value="">Всі країни</option>
+          <option>Італія</option><option>Греція</option><option>Чехія</option>
+          <option>Мальдіви</option><option>Норвегія</option><option>Франція</option>
+          <option>Таїланд</option><option>Іспанія</option><option>Японія</option>
+          <option>Швейцарія</option><option>Туреччина</option>
+        </select>
+      </div>
+      <div class="si-group">
+        <label>Бюджет (грн)</label>
+        <select id="sBudget">
+          <option value="">Будь-який</option>
+          <option value="20000">до 20 000</option>
+          <option value="35000">до 35 000</option>
+          <option value="55000">до 55 000</option>
+          <option value="999999">понад 55 000</option>
+        </select>
+      </div>
+      <div class="si-group">
+        <label>Кількість осіб</label>
+        <select id="sPersons">
+          <option>1 особа</option><option>2 особи</option>
+          <option>3 особи</option><option>4+ особи</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" id="searchBtn" style="align-self:flex-end">🔍 Знайти</button>
+      <button class="btn btn-outline" id="resetBtn" style="align-self:flex-end">Скинути</button>
+    </div>
+
+    <!-- filter + sort row -->
+    <div class="filter-sort-row reveal">
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-cat="all">Всі</button>
+        <button class="filter-btn" data-cat="Пляж">🏖 Пляж</button>
+        <button class="filter-btn" data-cat="Гори">⛰ Гори</button>
+        <button class="filter-btn" data-cat="Місто">🏙 Місто</button>
+        <button class="filter-btn" data-cat="Екзотика">🌴 Екзотика</button>
+        <button class="filter-btn" data-cat="Круїз">🚢 Круїз</button>
+      </div>
+      <select class="sort-sel" id="sortSel">
+        <option value="default">Сортувати</option>
+        <option value="price-asc">Ціна ↑</option>
+        <option value="price-desc">Ціна ↓</option>
+        <option value="name-asc">Назва А→Я</option>
+        <option value="rating-desc">Рейтинг ↓</option>
+        <option value="duration-asc">Тривалість ↑</option>
+      </select>
+    </div>
+
+    <div class="tours-grid" id="toursGrid"></div>
+    <div class="no-results" id="noRes">😔 За вашими фільтрами турів не знайдено</div>
+    <div class="tours-cta reveal">
+      <p id="tourCount" style="color:var(--text-muted);font-size:.9rem;margin-bottom:1rem"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section class="features-body">
+  <div class="container">
+    <div class="feat-inner">
+      <div class="feat-text reveal">
+        <p class="sec-tag">Наші переваги</p>
+        <h2 class="sec-title">Чому понад 5000 клієнтів обирають SkyWay</h2>
+        <p class="feat-lead">Ми не просто продаємо путівки — ми створюємо досвід. Кожен тур розроблений так, щоб ви поверталися додому зі спогадами на все життя.</p>
+        <ul class="feat-list">
+          <li>Власна мережа партнерів у 40+ країнах світу</li>
+          <li>Персональний менеджер для кожного клієнта</li>
+          <li>Повне страхування та підтримка 24/7 під час подорожі</li>
+          <li>Гнучка система оплати та розстрочки</li>
+          <li>Бонусна програма для постійних клієнтів</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openModal('registerModal')">Стати клієнтом</button>
+      </div>
+      <div class="feat-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format" alt="Туристичний автобус SkyWay Travel — комфортні поїздки по Європі" loading="lazy">
+        <div class="feat-img-badge">
+          <strong>10+ років</strong>
+          <span>на ринку туризму</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURE CARDS ══ -->
+<section class="sec" style="padding-top:0">
+  <div class="container">
+    <div class="feat-cards-grid">
+      <div class="feat-card reveal"><div class="feat-icon">📸</div><h3>Фотографія</h3><p>Фотографічні тури та майстер-класи з пейзажної зйомки у найкрасивіших куточках світу.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">🚴</div><h3>Велосипедні тури</h3><p>Маршрути для активних мандрівників: від рівнинної Голландії до гірського Відня.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">🥾</div><h3>Пішохідні маршрути</h3><p>Треккінг у Альпах, Карпатах, Гімалаях. Маршрути для будь-якого рівня підготовки.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">⛷️</div><h3>Гірські лижі</h3><p>Зимові тури на найкращі гірськолижні курорти Австрії, Швейцарії та Франції.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ADDITIONAL SERVICES ══ -->
+<section class="services-body">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-tag">Додаткові послуги</p>
+      <h2 class="sec-title">Ще більше можливостей для відпочинку</h2>
+      <p class="sec-sub">Розширте свою подорож додатковими активностями та послугами від SkyWay Travel</p>
+    </div>
+    <div class="svc-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+      <p class="footer-about">Ваш надійний партнер у подорожах з 2014 року. Більше 5000 щасливих клієнтів.</p>
+      <div class="social-links">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+        <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Навігація</h4><ul><li><a href="index.html">Головна</a></li><li><a href="tours.html">Тури</a></li><li><a href="about.html">Про нас</a></li><li><a href="contacts.html">Контакти</a></li><li><a href="404.html">404</a></li></ul></div>
+    <div class="footer-col"><h4>Напрямки</h4><ul><li><a href="#">Європа</a></li><li><a href="#">Азія</a></li><li><a href="#">Африка</a></li><li><a href="#">Америка</a></li><li><a href="#">Острови</a></li></ul></div>
+    <div class="footer-col"><h4>Контакти</h4><ul class="footer-contacts"><li>📍 вул. Хрещатик, 22, Київ</li><li>📞 +38 (067) 412-83-59</li><li>✉️ info@skyway.ua</li><li>🕐 Пн–Пт: 9:00–18:00</li></ul></div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 SkyWay Travel. Всі права захищені.</p><div style="display:flex;gap:1rem"><a href="#">Конфіденційність</a><a href="404.html">404</a></div></div></div>
+</footer>
+
+<button class="btn-up" id="btnUp" aria-label="Вгору">↑</button>
+
+<!-- MODAL LOGIN -->
+<div class="modal" id="loginModal" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" id="loginBackdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <h2 class="modal-title">Вхід</h2>
+    <p class="modal-sub">З поверненням!</p>
+    <div class="fg"><label>Електронна пошта</label><input type="email" placeholder="your@email.com"></div>
+    <div class="fg"><label>Пароль</label><input type="password" placeholder="••••••••"></div>
+    <button class="btn btn-primary" onclick="showToast('✅ Вхід виконано!')">Увійти</button>
+    <p class="modal-switch">Немає акаунту? <a href="#" onclick="switchModal('loginModal','registerModal')">Зареєструватись</a></p>
+  </div>
+</div>
+
+<!-- MODAL REGISTER -->
+<div class="modal" id="registerModal" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" id="registerBackdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+    <h2 class="modal-title">Реєстрація</h2>
+    <p class="modal-sub">Приєднуйтесь до SkyWay!</p>
+    <div class="fg"><label>Ім'я та прізвище</label><input type="text" placeholder="Іван Петренко"></div>
+    <div class="fg"><label>Електронна пошта</label><input type="email" placeholder="your@email.com"></div>
+    <div class="fg"><label>Пароль</label><input type="password" placeholder="Мінімум 8 символів"></div>
+    <div class="fg"><label>Підтвердіть пароль</label><input type="password" placeholder="Повторіть пароль"></div>
+    <button class="btn btn-primary" onclick="showToast('🎉 Реєстрацію виконано!')">Зареєструватись</button>
+    <p class="modal-switch">Вже маєте акаунт? <a href="#" onclick="switchModal('registerModal','loginModal')">Увійти</a></p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ════ DATA ════ */
+const TOURS=[
+  {id:1,name:'Незабутня Італія',country:'Італія',cat:'Місто',desc:'Рим, Венеція, Флоренція — три перлини Апеннінського півострова.',price:19999,duration:10,rating:4.9,badge:'Хіт',img:'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&auto=format',nights:9,meals:'Сніданок'},
+  {id:2,name:'Грецькі острови',country:'Греція',cat:'Пляж',desc:'Санторіні, Міконос та найкращі пляжі Середземномор\'я.',price:24999,duration:8,rating:4.8,badge:'Популярне',img:'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&auto=format',nights:7,meals:'Все включено'},
+  {id:3,name:'Магічна Чехія',country:'Чехія',cat:'Місто',desc:'Прага, Карлові Вари та середньовічні замки.',price:14999,duration:6,rating:4.7,badge:'Бюджетно',img:'https://images.unsplash.com/photo-1541849546-216549ae216d?w=600&auto=format',nights:5,meals:'Сніданок'},
+  {id:4,name:'Мальдіви — рай на землі',country:'Мальдіви',cat:'Екзотика',desc:'Кришталева вода, корали та бунгало над океаном.',price:79999,duration:12,rating:5.0,badge:'Преміум',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format',nights:11,meals:'Все включено'},
+  {id:5,name:'Норвезькі фіорди',country:'Норвегія',cat:'Гори',desc:'Захопливі пейзажі, фіорди та Північне сяйво.',price:38999,duration:9,rating:4.9,badge:'Унікальне',img:'https://images.unsplash.com/photo-1531761535209-180857e963b9?w=600&auto=format',nights:8,meals:'Сніданок'},
+  {id:6,name:'Романтичний Париж',country:'Франція',cat:'Місто',desc:'Ейфелева вежа, Лувр, круасани та атмосфера кохання.',price:27999,duration:7,rating:4.8,badge:'Романтика',img:'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&auto=format',nights:6,meals:'Сніданок'},
+  {id:7,name:'Таїланд: храми та пляжі',country:'Таїланд',cat:'Екзотика',desc:'Бангкок, Паттайя, острів Пхукет — повне занурення в культуру.',price:32999,duration:14,rating:4.7,badge:'Довгий тур',img:'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&auto=format',nights:13,meals:'Сніданок і вечеря'},
+  {id:8,name:'Іспанія: сонце та фієста',country:'Іспанія',cat:'Пляж',desc:'Барселона, Мадрид, Коста-Брава. Фламенко та тапас.',price:22999,duration:10,rating:4.6,badge:'Спекотно',img:'https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=600&auto=format',nights:9,meals:'Все включено'},
+  {id:9,name:'Японія: традиції та технології',country:'Японія',cat:'Місто',desc:'Токіо, Кіото, Осака — подорож між минулим і майбутнім.',price:65999,duration:14,rating:5.0,badge:'Ексклюзив',img:'https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=600&auto=format',nights:13,meals:'Сніданок'},
+  {id:10,name:'Альпійський відпочинок',country:'Швейцарія',cat:'Гори',desc:'Женева, Цюрих, Інтерлакен. Шоколад, сир і засніжені вершини.',price:52999,duration:8,rating:4.9,badge:'Гірський',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format',nights:7,meals:'Сніданок'},
+  {id:11,name:'Середземноморський круїз',country:'Греція / Туреччина',cat:'Круїз',desc:'7 портів за 8 днів: Афіни, Стамбул, Дубровник, Котор.',price:44999,duration:8,rating:4.8,badge:'Круїз',img:'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&auto=format',nights:7,meals:'Все включено'},
+  {id:12,name:'Туреччина All Inclusive',country:'Туреччина',cat:'Пляж',desc:'Анталія, Кемер, Белек. Найкращий сервіс за найкращою ціною.',price:16999,duration:7,rating:4.5,badge:'Бестселер',img:'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=600&auto=format',nights:6,meals:'Все включено'}
+];
+
+const SERVICES=[
+  {name:'Фото-тури',desc:'Незабутні знімки у найкрасивіших місцях планети з досвідченим фотографом.',img:'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&auto=format',icon:'📸'},
+  {name:'Велосипедні маршрути',desc:'Активний відпочинок на велосипеді через живописні міста та сільські пейзажі.',img:'https://images.unsplash.com/photo-1541614101331-1a5a3a194e92?w=600&auto=format',icon:'🚴'},
+  {name:'Пішохідний треккінг',desc:'Маршрути по гірських стежках Альп, Карпат та Гімалаїв. Будь-який рівень складності.',img:'https://images.unsplash.com/photo-1501555088652-021faa106b9b?w=600&auto=format',icon:'🥾'},
+  {name:'Гірськолижні тури',desc:'Зимовий відпочинок на найкращих курортах Австрії, Швейцарії та Андорри.',img:'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&auto=format',icon:'⛷️'},
+  {name:'Пляжний відпочинок',desc:'Бездоганні пляжі, теплі моря та кришталева вода Середземномор\'я та Азії.',img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format',icon:'🏖'},
+  {name:'Гірські маршрути',desc:'Треккінг на плато і вершини з приголомшливими краєвидами та свіжим гірським повітрям.',img:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format',icon:'⛰'}
+];
+
+/* ════ STATE ════ */
+let curCat='all', curSort='default', budgetFilter=0, countryFilter='';
+
+/* ════ RENDER TOURS ════ */
+function renderTours(){
+  let data=[...TOURS];
+  if(curCat!=='all') data=data.filter(t=>t.cat===curCat);
+  if(countryFilter) data=data.filter(t=>t.country.toLowerCase().includes(countryFilter.toLowerCase()));
+  if(budgetFilter) data=data.filter(t=>t.price<=budgetFilter);
+  switch(curSort){
+    case'price-asc': data.sort((a,b)=>a.price-b.price);break;
+    case'price-desc': data.sort((a,b)=>b.price-a.price);break;
+    case'name-asc': data.sort((a,b)=>a.name.localeCompare(b.name,'uk'));break;
+    case'rating-desc': data.sort((a,b)=>b.rating-a.rating);break;
+    case'duration-asc': data.sort((a,b)=>a.duration-b.duration);break;
+  }
+  const grid=document.getElementById('toursGrid');
+  const noRes=document.getElementById('noRes');
+  const cnt=document.getElementById('tourCount');
+  if(!data.length){grid.innerHTML='';noRes.style.display='block';cnt.textContent='';return;}
+  noRes.style.display='none';
+  cnt.textContent=`Знайдено ${data.length} тур${data.length===1?'':'ів'}`;
+  grid.innerHTML=data.map(t=>`
+    <article class="tour-card">
+      <div class="tc-img">
+        <img src="${t.img}" alt="Тур ${t.name} — ${t.country}" loading="lazy">
+        <span class="tc-badge">${t.badge}</span>
+        <span class="tc-cat">${t.cat}</span>
+      </div>
+      <div class="tc-body">
+        <div class="tc-loc">📍 ${t.country}</div>
+        <h3 class="tc-name">${t.name}</h3>
+        <p class="tc-desc">${t.desc}</p>
+        <div class="tc-meta"><span>🌙 ${t.nights} ночей</span><span>🍽 ${t.meals}</span><span>⭐ ${t.rating}</span></div>
+        <div class="tc-footer">
+          <div class="tc-price">${t.price.toLocaleString('uk-UA')} грн<br><small>на особу</small></div>
+          <button class="btn btn-primary btn-sm" onclick="showToast('✅ «${t.name}» додано до кошика!')">Бронювати</button>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
+/* ════ RENDER SERVICES ════ */
+function renderServices(){
+  document.getElementById('servicesGrid').innerHTML=SERVICES.map(s=>`
+    <div class="svc-card">
+      <div class="svc-img">
+        <img src="${s.img}" alt="${s.name} — туристична послуга SkyWay Travel" loading="lazy">
+        <div class="svc-img-overlay"></div>
+      </div>
+      <div class="svc-body">
+        <h3>${s.icon} ${s.name}</h3>
+        <p>${s.desc}</p>
+        <button class="svc-btn" onclick="showToast('📋 Деталі послуги «${s.name}» надіслано на вашу пошту')">Дізнатись більше</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ════ FILTERS ════ */
+document.getElementById('filterBar').addEventListener('click',e=>{
+  const btn=e.target.closest('.filter-btn');
+  if(!btn)return;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  curCat=btn.dataset.cat;
+  renderTours();
+});
+document.getElementById('sortSel').addEventListener('change',e=>{curSort=e.target.value;renderTours();});
+document.getElementById('searchBtn').addEventListener('click',()=>{
+  countryFilter=document.getElementById('sCountry').value;
+  const b=document.getElementById('sBudget').value;
+  budgetFilter=b?Number(b):0;
+  renderTours();
+  document.getElementById('tours').scrollIntoView({behavior:'smooth'});
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  countryFilter='';budgetFilter=0;
+  document.getElementById('sCountry').value='';
+  document.getElementById('sBudget').value='';
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.filter-btn[data-cat="all"]').classList.add('active');
+  curCat='all';curSort='default';
+  document.getElementById('sortSel').value='default';
+  renderTours();
+  showToast('🔄 Фільтри скинуто');
+});
+
+/* ════ MODALS ════ */
+function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+function switchModal(from,to){closeModal(from);setTimeout(()=>openModal(to),150);}
+document.getElementById('loginBackdrop').addEventListener('click',()=>closeModal('loginModal'));
+document.getElementById('registerBackdrop').addEventListener('click',()=>closeModal('registerModal'));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('loginModal');closeModal('registerModal');}});
+
+/* ════ TOAST ════ */
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+/* ════ HEADER ════ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('header').classList.toggle('scrolled',window.scrollY>60);
+  document.getElementById('btnUp').classList.toggle('vis',window.scrollY>400);
+});
+document.getElementById('btnUp').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ════ BURGER ════ */
+const burger=document.getElementById('burger');
+const nav=document.getElementById('nav');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');nav.classList.toggle('open');});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.remove('open');nav.classList.remove('open');}));
+
+/* ════ THEME ════ */
+const themeBtn=document.getElementById('themeToggle');
+const saved=localStorage.getItem('skyway-theme')||'light';
+document.documentElement.setAttribute('data-theme',saved);
+themeBtn.textContent=saved==='dark'?'☀️':'🌙';
+themeBtn.addEventListener('click',()=>{
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  const next=isDark?'light':'dark';
+  document.documentElement.setAttribute('data-theme',next);
+  localStorage.setItem('skyway-theme',next);
+  themeBtn.textContent=next==='dark'?'☀️':'🌙';
+});
+
+/* ════ REVEAL ════ */
+const ro=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');ro.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ════ INIT ════ */
+renderTours();
+renderServices();
+</script>
+</body>
+</html>
