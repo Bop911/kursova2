@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Про нас — SkyWay Travel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Головна</a>
+      <a href="tours.html">Тури</a>
+      <a href="about.html" class="active">Про нас</a>
+      <a href="contacts.html">Контакти</a>
+      <div class="mobile-extras">
+        <button class="btn btn-sm login-btn" onclick="openModal('loginModal')">Увійти</button>
+        <button class="btn btn-sm btn-primary" onclick="openModal('registerModal')">Реєстрація</button>
+      </div>
+    </nav>
+    <div class="header-phone">+38 (067) 412-83-59</div>
+    <div class="header-actions">
+      <button class="btn btn-sm login-btn" id="loginBtn">Увійти</button>
+      <button class="btn btn-sm btn-primary" id="registerBtn">Реєстрація</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Змінити тему">🌙</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+
+<section class="page-hero">
+  <div class="page-hero-dots"></div>
+  <div class="page-hero-content container">
+    <div class="page-breadcrumb"><a href="index.html">Головна</a><span>›</span><span>Про нас</span></div>
+    <h1>Ми — SkyWay Travel</h1>
+    <p>З 2014 року допомагаємо людям відкривати світ. Понад 5000 мандрівників довірили нам свої незабутні подорожі.</p>
+  </div>
+</section>
+
+
+<section class="sec">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-img reveal">
+        <img src="images/about-story.jpg" alt="Команда SkyWay Travel">
+        <div class="story-badge">
+          <div class="story-badge-num">10+</div>
+          <div class="story-badge-label">Років на ринку</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="sec-tag">Наша історія</p>
+        <h2 class="sec-title">Подорожі — це наша пристрасть</h2>
+        <div class="story-text">
+          <p>SkyWay Travel заснована у 2014 році групою ентузіастів-мандрівників, які хотіли зробити якісний відпочинок доступним для кожного. Ми починали з невеликого офісу в центрі Києва, а сьогодні — це команда з 35 фахівців і понад 150 напрямків.</p>
+          <p>Наша місія проста: щоб кожен клієнт повернувся додому щасливим і вже планував наступну пригоду разом з нами.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">2014</div>
+            <div class="timeline-title">Заснування агентства</div>
+            <div class="timeline-desc">Перший офіс на Хрещатику, 5 перших напрямків.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2017</div>
+            <div class="timeline-title">1000-й клієнт</div>
+            <div class="timeline-desc">Розширення команди, запуск онлайн-бронювання.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2020</div>
+            <div class="timeline-title">Цифрова трансформація</div>
+            <div class="timeline-desc">Новий сайт, мобільний додаток та чат-підтримка 24/7.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-title">5000+ клієнтів</div>
+            <div class="timeline-desc">150+ напрямків, 98% позитивних відгуків.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec" style="background:var(--bg)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem" class="reveal">
+      <p class="sec-tag">Наші цінності</p>
+      <h2 class="sec-title">На чому ми будуємо роботу</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal"><div class="value-icon">🤝</div><h3>Довіра</h3><p>Чесність у всьому — від цін до умов бронювання. Жодних прихованих платежів.</p></div>
+      <div class="value-card reveal"><div class="value-icon">🎯</div><h3>Індивідуальний підхід</h3><p>Кожна подорож унікальна. Ми слухаємо вас і підбираємо тур під ваші бажання.</p></div>
+      <div class="value-card reveal"><div class="value-icon">⚡</div><h3>Оперативність</h3><p>Бронювання за 5 хвилин. Відповідь на запит — протягом години.</p></div>
+      <div class="value-card reveal"><div class="value-icon">🌿</div><h3>Відповідальний туризм</h3><p>Підтримуємо місцеві спільноти та еко-ініціативи в країнах, куди відправляємо клієнтів.</p></div>
+      <div class="value-card reveal"><div class="value-icon">🏅</div><h3>Якість</h3><p>Лише перевірені партнери — готелі, авіакомпанії та страхові компанії.</p></div>
+      <div class="value-card reveal"><div class="value-icon">💬</div><h3>Підтримка</h3><p>Ми поряд 24/7. Під час подорожі ви ніколи не залишитеся наодинці з проблемою.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="stats-band">
+  <div class="container stats-inner">
+    <div class="stat-item reveal"><div class="stat-num">5 000+</div><div class="stat-label">Задоволених клієнтів</div></div>
+    <div class="stat-item reveal"><div class="stat-num">150+</div><div class="stat-label">Напрямків</div></div>
+    <div class="stat-item reveal"><div class="stat-num">35</div><div class="stat-label">Фахівців у команді</div></div>
+    <div class="stat-item reveal"><div class="stat-num">98%</div><div class="stat-label">Позитивних відгуків</div></div>
+  </div>
+</section>
+
+
+<section class="sec">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem" class="reveal">
+      <p class="sec-tag">Наша команда</p>
+      <h2 class="sec-title">Люди, які роблять подорожі незабутніми</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-photo"><img src="images/team-ceo.jpg" alt="Олексій Мороз"></div>
+        <div class="team-info"><div class="team-name">Олексій Мороз</div><div class="team-role">Засновник & CEO</div><div class="team-bio">Мандрував у 60+ країнах. Мрія стала бізнесом у 2014 році.</div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo"><img src="images/team-sales.jpg" alt="Марина Коваль"></div>
+        <div class="team-info"><div class="team-name">Марина Коваль</div><div class="team-role">Head of Sales</div><div class="team-bio">Підбирає тури так, що клієнти повертаються знову і знову.</div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo"><img src="images/team-expert.jpg" alt="Дмитро Савченко"></div>
+        <div class="team-info"><div class="team-name">Дмитро Савченко</div><div class="team-role">Travel Expert</div><div class="team-bio">Спеціаліст з Азії та екзотичних напрямків. Знає Таїланд як свою долоню.</div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-photo"><img src="images/team-care.jpg" alt="Анна Литвин"></div>
+        <div class="team-info"><div class="team-name">Анна Литвин</div><div class="team-role">Customer Care</div><div class="team-bio">Завжди на зв'язку. Вирішить будь-яке питання швидко і з посмішкою.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+      <p class="footer-about">Ваш надійний партнер у подорожах з 2014 року. Більше 5000 щасливих клієнтів по всьому світу.</p>
+    </div>
+    <div class="footer-col"><h4>Навігація</h4><ul><li><a href="index.html">Головна</a></li><li><a href="tours.html">Тури</a></li><li><a href="about.html">Про нас</a></li><li><a href="contacts.html">Контакти</a></li></ul></div>
+    <div class="footer-col"><h4>Напрямки</h4><ul><li><a href="#">Європа</a></li><li><a href="#">Азія</a></li><li><a href="#">Африка</a></li><li><a href="#">Америка</a></li><li><a href="#">Острови</a></li></ul></div>
+    <div class="footer-col"><h4>Контакти</h4><ul class="footer-contacts"><li>📍 вул. Хрещатик, 22, Київ</li><li>📞 +38 (067) 412-83-59</li><li>✉️ info@skyway.ua</li><li>🕐 Пн–Пт: 9:00–18:00</li></ul></div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 SkyWay Travel. Всі права захищені.</p><a href="#">Політика конфіденційності</a></div></div>
+</footer>
+
+<button class="btn-up" id="btnUp" aria-label="Вгору">↑</button>
+<div class="toast" id="toast"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyWay Travel — Наші тури та послуги</title>
+  <meta name="description" content="Каталог турів SkyWay Travel. Пляжний відпочинок, гірські тури, міські екскурсії та екзотичні напрямки по всьому світу.">
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+<header class="header" id="header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Головна</a>
+      <a href="tours.html" class="active">Тури</a>
+      <a href="about.html">Про нас</a>
+      <a href="contacts.html">Контакти</a>
+      <div class="mobile-extras">
+        <button class="btn btn-sm login-btn" onclick="openModal('loginModal')">Увійти</button>
+        <button class="btn btn-sm btn-primary" onclick="openModal('registerModal')">Реєстрація</button>
+      </div>
+    </nav>
+    <div class="header-phone">+38 (067) 412-83-59</div>
+    <div class="header-actions">
+      <button class="btn btn-sm login-btn" id="loginBtn">Увійти</button>
+      <button class="btn btn-sm btn-primary" id="registerBtn">Реєстрація</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Змінити тему">🌙</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+
+<section class="page-hero">
+  <div class="hero-dots page-hero-dots"></div>
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Головна</a>
+      <span>/</span>
+      <span style="color:rgba(255,255,255,.85)">Тури</span>
+    </div>
+    <h1>Наші <em>тури</em></h1>
+    <p>Понад 12 напрямків — від тихих пляжів до засніжених вершин. Знайдіть свою ідеальну подорож.</p>
+  </div>
+</section>
+
+
+<section class="tours-body" id="tours">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-tag">Каталог турів</p>
+      <h2 class="sec-title">Обирайте напрямок</h2>
+      <p class="sec-sub">Використовуйте пошук та фільтри, щоб знайти ідеальний тур</p>
+    </div>
+
+    
+    <div class="search-inline reveal">
+      <div class="si-group">
+        <label>Країна</label>
+        <select id="sCountry">
+          <option value="">Всі країни</option>
+          <option>Італія</option><option>Греція</option><option>Чехія</option>
+          <option>Мальдіви</option><option>Норвегія</option><option>Франція</option>
+          <option>Таїланд</option><option>Іспанія</option><option>Японія</option>
+          <option>Швейцарія</option><option>Туреччина</option>
+        </select>
+      </div>
+      <div class="si-group">
+        <label>Бюджет (грн)</label>
+        <select id="sBudget">
+          <option value="">Будь-який</option>
+          <option value="20000">до 20 000</option>
+          <option value="35000">до 35 000</option>
+          <option value="55000">до 55 000</option>
+          <option value="999999">понад 55 000</option>
+        </select>
+      </div>
+      <div class="si-group">
+        <label>Кількість осіб</label>
+        <select id="sPersons">
+          <option>1 особа</option><option>2 особи</option>
+          <option>3 особи</option><option>4+ особи</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" id="searchBtn" style="align-self:flex-end">🔍 Знайти</button>
+      <button class="btn btn-outline" id="resetBtn" style="align-self:flex-end">Скинути</button>
+    </div>
+
+    
+    <div class="filter-sort-row reveal">
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-cat="all">Всі</button>
+        <button class="filter-btn" data-cat="Пляж">🏖 Пляж</button>
+        <button class="filter-btn" data-cat="Гори">⛰ Гори</button>
+        <button class="filter-btn" data-cat="Місто">🏙 Місто</button>
+        <button class="filter-btn" data-cat="Екзотика">🌴 Екзотика</button>
+        <button class="filter-btn" data-cat="Круїз">🚢 Круїз</button>
+      </div>
+      <select class="sort-sel" id="sortSel">
+        <option value="default">Сортувати</option>
+        <option value="price-asc">Ціна ↑</option>
+        <option value="price-desc">Ціна ↓</option>
+        <option value="name-asc">Назва А→Я</option>
+        <option value="rating-desc">Рейтинг ↓</option>
+        <option value="duration-asc">Тривалість ↑</option>
+      </select>
+    </div>
+
+    <div class="tours-grid" id="toursGrid"></div>
+    <div class="no-results" id="noRes">😔 За вашими фільтрами турів не знайдено</div>
+    <div class="tours-cta reveal">
+      <p id="tourCount" style="color:var(--text-muted);font-size:.9rem;margin-bottom:1rem"></p>
+    </div>
+  </div>
+</section>
+
+
+<section class="features-body">
+  <div class="container">
+    <div class="feat-inner">
+      <div class="feat-text reveal">
+        <p class="sec-tag">Наші переваги</p>
+        <h2 class="sec-title">Чому понад 5000 клієнтів обирають SkyWay</h2>
+        <p class="feat-lead">Ми не просто продаємо путівки — ми створюємо досвід. Кожен тур розроблений так, щоб ви поверталися додому зі спогадами на все життя.</p>
+        <ul class="feat-list">
+          <li>Власна мережа партнерів у 40+ країнах світу</li>
+          <li>Персональний менеджер для кожного клієнта</li>
+          <li>Повне страхування та підтримка 24/7 під час подорожі</li>
+          <li>Гнучка система оплати та розстрочки</li>
+          <li>Бонусна програма для постійних клієнтів</li>
+        </ul>
+        <button class="btn btn-primary" onclick="openModal('registerModal')">Стати клієнтом</button>
+      </div>
+      <div class="feat-img-wrap reveal">
+        <img src="images/about-bus.jpg" alt="Туристичний автобус SkyWay Travel — комфортні поїздки по Європі" loading="lazy" onerror="this.src='images/placeholder.jpg'">
+        <div class="feat-img-badge">
+          <strong>10+ років</strong>
+          <span>на ринку туризму</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec" style="padding-top:0">
+  <div class="container">
+    <div class="feat-cards-grid">
+      <div class="feat-card reveal"><div class="feat-icon">📸</div><h3>Фотографія</h3><p>Фотографічні тури та майстер-класи з пейзажної зйомки у найкрасивіших куточках світу.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">🚴</div><h3>Велосипедні тури</h3><p>Маршрути для активних мандрівників: від рівнинної Голландії до гірського Відня.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">🥾</div><h3>Пішохідні маршрути</h3><p>Треккінг у Альпах, Карпатах, Гімалаях. Маршрути для будь-якого рівня підготовки.</p></div>
+      <div class="feat-card reveal"><div class="feat-icon">⛷️</div><h3>Гірські лижі</h3><p>Зимові тури на найкращі гірськолижні курорти Австрії, Швейцарії та Франції.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="services-body">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="sec-tag">Додаткові послуги</p>
+      <h2 class="sec-title">Ще більше можливостей для відпочинку</h2>
+      <p class="sec-sub">Розширте свою подорож додатковими активностями та послугами від SkyWay Travel</p>
+    </div>
+    <div class="svc-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+      <p class="footer-about">Ваш надійний партнер у подорожах з 2014 року. Більше 5000 щасливих клієнтів.</p>
+      <div class="social-links">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.514c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+        <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Навігація</h4><ul><li><a href="index.html">Головна</a></li><li><a href="tours.html">Тури</a></li><li><a href="about.html">Про нас</a></li><li><a href="contacts.html">Контакти</a></li><li><a href="404.html">404</a></li></ul></div>
+    <div class="footer-col"><h4>Напрямки</h4><ul><li><a href="#">Європа</a></li><li><a href="#">Азія</a></li><li><a href="#">Африка</a></li><li><a href="#">Америка</a></li><li><a href="#">Острови</a></li></ul></div>
+    <div class="footer-col"><h4>Контакти</h4><ul class="footer-contacts"><li>📍 вул. Хрещатик, 22, Київ</li><li>📞 +38 (067) 412-83-59</li><li>✉️ info@skyway.ua</li><li>🕐 Пн–Пт: 9:00–18:00</li></ul></div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 SkyWay Travel. Всі права захищені.</p><div style="display:flex;gap:1rem"><a href="#">Конфіденційність</a><a href="404.html">404</a></div></div></div>
+</footer>
+
+<button class="btn-up" id="btnUp" aria-label="Вгору">↑</button>
+
+
+<div class="modal" id="loginModal" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" id="loginBackdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <h2 class="modal-title">Вхід</h2>
+    <p class="modal-sub">З поверненням!</p>
+    <div class="fg"><label>Електронна пошта</label><input type="email" placeholder="your@email.com"></div>
+    <div class="fg"><label>Пароль</label><input type="password" placeholder="••••••••"></div>
+    <button class="btn btn-primary" onclick="showToast('✅ Вхід виконано!')">Увійти</button>
+    <p class="modal-switch">Немає акаунту? <a href="#" onclick="switchModal('loginModal','registerModal')">Зареєструватись</a></p>
+  </div>
+</div>
+
+
+<div class="modal" id="registerModal" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" id="registerBackdrop"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+    <h2 class="modal-title">Реєстрація</h2>
+    <p class="modal-sub">Приєднуйтесь до SkyWay!</p>
+    <div class="fg"><label>Ім'я та прізвище</label><input type="text" placeholder="Іван Петренко"></div>
+    <div class="fg"><label>Електронна пошта</label><input type="email" placeholder="your@email.com"></div>
+    <div class="fg"><label>Пароль</label><input type="password" placeholder="Мінімум 8 символів"></div>
+    <div class="fg"><label>Підтвердіть пароль</label><input type="password" placeholder="Повторіть пароль"></div>
+    <button class="btn btn-primary" onclick="showToast('🎉 Реєстрацію виконано!')">Зареєструватись</button>
+    <p class="modal-switch">Вже маєте акаунт? <a href="#" onclick="switchModal('registerModal','loginModal')">Увійти</a></p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

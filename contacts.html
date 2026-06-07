@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакти — SkyWay Travel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container">
+    <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Головна</a>
+      <a href="tours.html">Тури</a>
+      <a href="about.html">Про нас</a>
+      <a href="contacts.html" class="active">Контакти</a>
+      <div class="mobile-extras">
+        <button class="btn btn-sm login-btn" onclick="openModal('loginModal')">Увійти</button>
+        <button class="btn btn-sm btn-primary" onclick="openModal('registerModal')">Реєстрація</button>
+      </div>
+    </nav>
+    <div class="header-phone">+38 (067) 412-83-59</div>
+    <div class="header-actions">
+      <button class="btn btn-sm login-btn" id="loginBtn">Увійти</button>
+      <button class="btn btn-sm btn-primary" id="registerBtn">Реєстрація</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Змінити тему">🌙</button>
+    </div>
+    <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+
+<section class="page-hero">
+  <div class="page-hero-dots"></div>
+  <div class="page-hero-content container">
+    <div class="page-breadcrumb"><a href="index.html">Головна</a><span>›</span><span>Контакти</span></div>
+    <h1>Зв'яжіться з нами</h1>
+    <p>Ми завжди раді допомогти вам спланувати ідеальну подорож. Оберіть зручний спосіб зв'язку.</p>
+  </div>
+</section>
+
+
+<section class="sec">
+  <div class="container">
+    
+    <div class="contact-cards">
+      <div class="contact-card reveal">
+        <div class="cc-icon">📍</div>
+        <div class="cc-label">Адреса</div>
+        <div class="cc-value">вул. Хрещатик, 22<br>Київ, Україна</div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="cc-icon">📞</div>
+        <div class="cc-label">Телефон</div>
+        <div class="cc-value"><a href="tel:+380674128359">+38 (067) 412-83-59</a><br><a href="tel:+380444441234">+38 (044) 444-12-34</a></div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="cc-icon">✉️</div>
+        <div class="cc-label">Email</div>
+        <div class="cc-value"><a href="mailto:info@skyway.ua">info@skyway.ua</a><br><a href="mailto:booking@skyway.ua">booking@skyway.ua</a></div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="cc-icon">🕐</div>
+        <div class="cc-label">Графік роботи</div>
+        <div class="cc-value">Пн–Пт: 9:00–18:00<br>Сб: 10:00–15:00</div>
+      </div>
+    </div>
+
+    
+    <div class="contacts-main">
+      <!-- FORM -->
+      <div class="form-wrap reveal">
+        <h2 class="form-title">Написати нам</h2>
+        <p class="form-sub">Заповніть форму — відповімо протягом 1 години</p>
+        <div class="form-row">
+          <div class="form-group"><label>Ім'я</label><input type="text" placeholder="Іван Петренко" id="fname"></div>
+          <div class="form-group"><label>Телефон</label><input type="tel" placeholder="+38 (0__) ___-__-__" id="fphone"></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" id="femail"></div>
+        <div class="form-group">
+          <label>Тема</label>
+          <select id="ftopic">
+            <option value="">Оберіть тему</option>
+            <option>Консультація щодо туру</option>
+            <option>Бронювання</option>
+            <option>Скасування або зміна</option>
+            <option>Відгук</option>
+            <option>Інше</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Повідомлення</label><textarea placeholder="Розкажіть, яка подорож вас цікавить..." id="fmessage"></textarea></div>
+        <button class="btn btn-primary form-submit" id="fsubmit">✉️ Надіслати повідомлення</button>
+      </div>
+
+      
+      <div class="reveal">
+        <div class="map-placeholder">
+          <div class="map-pin">📍</div>
+          <div class="map-addr">вул. Хрещатик, 22, Київ</div>
+          <a href="https://maps.google.com/?q=Khreshchatyk+22+Kyiv" target="_blank" rel="noopener" class="map-link">Відкрити в Google Maps →</a>
+        </div>
+
+        <div class="hours-card">
+          <h4>🕐 Графік роботи</h4>
+          <div class="hours-row"><span class="hours-day">Понеділок–П'ятниця</span><span class="hours-time">9:00–18:00</span></div>
+          <div class="hours-row"><span class="hours-day">Субота</span><span class="hours-time">10:00–15:00</span></div>
+          <div class="hours-row"><span class="hours-day">Неділя</span><span class="hours-closed">Вихідний</span></div>
+          <div class="hours-row" style="padding-top:.65rem;border-top:2px dashed var(--border)"><span class="hours-day">Онлайн-підтримка</span><span class="hours-time" style="color:var(--sky)">24/7</span></div>
+        </div>
+
+        <div class="social-card">
+          <h4>💬 Ми в соціальних мережах</h4>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="social-row"><span class="social-icon">📸</span><span class="social-name">Instagram</span><span class="social-handle">@skyway.travel</span></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" class="social-row"><span class="social-icon">👤</span><span class="social-name">Facebook</span><span class="social-handle">SkyWay Travel UA</span></a>
+          <a href="https://t.me/skyway" target="_blank" rel="noopener" class="social-row"><span class="social-icon">✈</span><span class="social-name">Telegram</span><span class="social-handle">@skyway_travel</span></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" class="social-row"><span class="social-icon">▶️</span><span class="social-name">YouTube</span><span class="social-handle">SkyWay Travel</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec faq-sec">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:2.5rem" class="reveal">
+      <p class="sec-tag">FAQ</p>
+      <h2 class="sec-title">Часті запитання</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-q">Як швидко ви відповідаєте на запити?</div>
+        <div class="faq-a">Зазвичай ми відповідаємо протягом 1 години в робочий час. У вихідні та нічний час — через онлайн-чат або Telegram.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Чи можна скасувати тур після оплати?</div>
+        <div class="faq-a">Так, скасування можливе. Умови повернення залежать від типу туру та термінів до від'їзду. Уточнюйте деталі при бронюванні.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Чи потрібна виза для більшості турів?</div>
+        <div class="faq-a">Для турів у Туреччину, Єгипет та деяких інших країн виза не потрібна. Для Шенгенської зони — потрібна. Наші менеджери нададуть детальну інформацію.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Чи включене страхування у вартість туру?</div>
+        <div class="faq-a">Базове страхування включене у всі пакетні тури. Додаткове медичне та від нещасних випадків можна оформити окремо.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Чи є знижки для дітей та груп?</div>
+        <div class="faq-a">Так! Діти до 2 років — безкоштовно, до 12 років — знижка до 30%. Для груп від 10 осіб діють спеціальні корпоративні умови.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Як оплатити тур?</div>
+        <div class="faq-a">Прийімаємо оплату картою, банківським переказом, готівкою в офісі, а також у розстрочку на 3–6 місяців без переплат через партнерські банки.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <a href="index.html" class="logo"><span class="logo-icon">✈</span> SkyWay Travel</a>
+      <p class="footer-about">Ваш надійний партнер у подорожах з 2014 року. Більше 5000 щасливих клієнтів по всьому світу.</p>
+    </div>
+    <div class="footer-col"><h4>Навігація</h4><ul><li><a href="index.html">Головна</a></li><li><a href="tours.html">Тури</a></li><li><a href="about.html">Про нас</a></li><li><a href="contacts.html">Контакти</a></li></ul></div>
+    <div class="footer-col"><h4>Напрямки</h4><ul><li><a href="#">Європа</a></li><li><a href="#">Азія</a></li><li><a href="#">Африка</a></li><li><a href="#">Америка</a></li><li><a href="#">Острови</a></li></ul></div>
+    <div class="footer-col"><h4>Контакти</h4><ul class="footer-contacts"><li>📍 вул. Хрещатик, 22, Київ</li><li>📞 +38 (067) 412-83-59</li><li>✉️ info@skyway.ua</li><li>🕐 Пн–Пт: 9:00–18:00</li></ul></div>
+  </div>
+  <div class="footer-bottom"><div class="container"><p>© 2026 SkyWay Travel. Всі права захищені.</p><a href="#">Політика конфіденційності</a></div></div>
+</footer>
+
+<button class="btn-up" id="btnUp" aria-label="Вгору">↑</button>
+<div class="toast" id="toast"></div>
+<script src="js/script.js"></script>
+</body>
+</html>
